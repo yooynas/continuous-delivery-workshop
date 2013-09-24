@@ -3,7 +3,6 @@
 # please notice: all provisioning scripts have to be idempotent
 #
 
-. /srv/deploy/vms/provision/config.sh
 . /srv/deploy/vms/provision/common.sh
 
 set -e 

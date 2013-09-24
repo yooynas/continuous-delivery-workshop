@@ -4,7 +4,7 @@
 #
 
 # include global configuration
-. /srv/deploy/provision/config.sh
+. /srv/deploy/vms/provision/common.sh
 
 set -e 
 RECIPE='pingworks-dash'

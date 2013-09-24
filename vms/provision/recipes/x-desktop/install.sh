@@ -4,7 +4,6 @@
 #
 
 # include global configuration
-. /srv/deploy/vms/provision/config.sh
 . /srv/deploy/vms/provision/common.sh
 
 set -e 
