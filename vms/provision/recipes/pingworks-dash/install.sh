@@ -65,6 +65,9 @@ a2enmod rewrite
 a2dissite 000-default
 a2ensite dash
 
+rsync -avx $CONF_PHOME/recipes/$RECIPE/config.js /etc/dash-frontend/config.js
+chmod 0644 /etc/dash-frontend/config.js
+  
 /etc/init.d/apache2 restart
 
 
