@@ -24,7 +24,7 @@ getBundleFolder $BUNDLE
 echo "Installing bundle $BUNDLE on environment $ENV .."
 ARTIFACTS=$(cd ${BUNDLE_FOLDER}/artifacts/; ls )
 cd ${BUNDLE_FOLDER}/artifacts/ 
-scp ${ARTIFACTS} ${ENV_USER}@${ENV}:${ENV_TMP}/
+scp -o StrictHostKeyChecking=no ${ARTIFACTS} ${ENV_USER}@${ENV}:${ENV_TMP}/
 for pkg in ${ARTIFACTS}; do
   ssh -o StrictHostKeyChecking=no ${ENV_USER}@${ENV} "cd ${ENV_TMP}; ${PKGMGR} ${PKGMGR_INSTALLOPTS} $pkg"
 done 
