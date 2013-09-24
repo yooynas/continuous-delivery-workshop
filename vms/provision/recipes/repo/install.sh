@@ -14,7 +14,7 @@ echo "# BEGIN Provisioning RECIPE $RECIPE"
 echo "# -------------------------------------------------"
 
 echo "Setting up repo vhost..."
-if [ ! -f /etc/apache2/sites-available/dash ];then
+if [ ! -f /etc/apache2/sites-available/repo ];then
 cat << EOF > /etc/apache2/sites-available/repo
 <VirtualHost *:80>
 ServerName repo.${DEPLOY_ENV_DOMAIN_SUFFIX}
