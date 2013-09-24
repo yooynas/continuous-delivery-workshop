@@ -26,7 +26,9 @@ apt-get --yes install jenkins
 /etc/init.d/jenkins stop
 
 JENKINS_PLUGINS=plugins.tar.gz
-[ ! -d /home/$CONF_DUSER/Downloads ] && mkdir /home/$CONF_DUSER/Downloads
+
+install -o ${CONF_DUSER} -g ${CONF_DGROUP} -m 755 -d /home/$CONF_DUSER/Downloads
+
 [ ! -z "$(file /home/$CONF_DUSER/Downloads/${JENKINS_PLUGINS} | grep empty)" ] && rm /home/$CONF_DUSER/Downloads/${JENKINS_PLUGINS}
   
 if [ ! -f /home/$CONF_DUSER/Downloads/${JENKINS_PLUGINS} ];then

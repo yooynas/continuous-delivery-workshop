@@ -17,7 +17,7 @@ echo "Setting up repo vhost..."
 if [ ! -f /etc/apache2/sites-available/repo ];then
 cat << EOF > /etc/apache2/sites-available/repo
 <VirtualHost *:80>
-ServerName repo.${DEPLOY_ENV_DOMAIN_SUFFIX}
+ServerName repo${DEPLOY_ENV_DOMAIN_SUFFIX}
 ServerAlias repo
 
 DocumentRoot /data/repo

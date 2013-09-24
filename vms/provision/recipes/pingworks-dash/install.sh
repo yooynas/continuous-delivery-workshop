@@ -17,7 +17,8 @@ DASH_FRONTEND_DEB="dash-frontend_1+git.fbb93bdf-145_all.deb"
 DASH_BACKEND_DEB="dash-backend_1+git.fbb93bdf-145_all.deb"
 DASH_REPO_URI="https://dash.pingworks.net/repo/master/1.fbb93bdf.145/artifacts/"
 
-[ ! -d /home/$CONF_DUSER/Downloads ] && mkdir /home/$CONF_DUSER/Downloads
+install -o ${CONF_DUSER} -g ${CONF_DGROUP} -m 755 -d /home/$CONF_DUSER/Downloads
+
 [ ! -z "$(file /home/$CONF_DUSER/Downloads/${DASH_FRONTEND_DEB} | grep empty)" ] && rm /home/$CONF_DUSER/Downloads/${DASH_FRONTEND_DEB}
 [ ! -z "$(file /home/$CONF_DUSER/Downloads/${DASH_BACKEND_DEB} | grep empty)" ] && rm /home/$CONF_DUSER/Downloads/${DASH_BACKEND_DEB}
     
@@ -46,7 +47,7 @@ fi
 if [ ! -f /etc/apache2/sites-available/dash ];then
     cat << EOF > /etc/apache2/sites-available/dash
 <VirtualHost *:80>
-ServerName dash.${DEPLOY_ENV_DOMAIN_SUFFIX}
+ServerName dash${DEPLOY_ENV_DOMAIN_SUFFIX}
 ServerAlias dash
 
 DocumentRoot /opt/dash/public

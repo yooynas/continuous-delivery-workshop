@@ -28,7 +28,7 @@ if [ ! -f /etc/init.d/headless-selenium ];then
 
   SELENIUM_JAR="selenium-server-standalone-2.31.0.jar"
 
-  [ ! -d /home/$CONF_DUSER/Downloads ] && mkdir /home/$CONF_DUSER/Downloads
+  install -o ${CONF_DUSER} -g ${CONF_DGROUP} -m 755 -d /home/$CONF_DUSER/Downloads
   [ ! -z "$(file /home/$CONF_DUSER/Downloads/${SELENIUM_JAR} | grep empty)" ] && rm /home/$CONF_DUSER/Downloads/${SELENIUM_JAR}
   
   if [ ! -f /home/$CONF_DUSER/Downloads/${SELENIUM_JAR} ];then
