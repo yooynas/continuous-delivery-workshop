@@ -15,7 +15,7 @@ echo "# -------------------------------------------------"
 
 JAVA_DEB="oracle-j2sdk1.7_1.7.0+update40_amd64.deb"
 
-[ ! -d /home/$CONF_DUSER/Downloads ] && mkdir /home/$CONF_DUSER/Downloads
+install -o ${CONF_DUSER} -g ${CONF_DGROUP} -m 755 -d /home/$CONF_DUSER/Downloads
 [ ! -z "$(file /home/$CONF_DUSER/Downloads/${JAVA_DEB} | grep empty)" ] && rm /home/$CONF_DUSER/Downloads/${JAVA_DEB}
   
 if [ ! -f /home/$CONF_DUSER/Downloads/${JAVA_DEB} ];then
