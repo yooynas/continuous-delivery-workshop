@@ -39,7 +39,7 @@ if [ ! -f /etc/init.d/headless-selenium ];then
   install -o root -g root -m 644 /home/$CONF_DUSER/Downloads/${SELENIUM_JAR} /usr/lib/headless-selenium
 fi
 
-/etc/init.d/headless-selenium start
+/etc/init.d/headless-selenium restart
 
 echo "# -------------------------------------------------"
 echo "# END Provisioning RECIPE $RECIPE"
