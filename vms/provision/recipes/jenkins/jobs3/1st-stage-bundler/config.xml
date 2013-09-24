@@ -41,7 +41,7 @@
       <hudson.plugins.git.UserRemoteConfig>
         <name></name>
         <refspec></refspec>
-        <url>https://github.com/pingworks/continuous-delivery-workshop.git</url>
+        <url>/data/git/continuous-delivery-workshop</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>

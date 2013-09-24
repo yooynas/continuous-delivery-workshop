@@ -34,7 +34,7 @@
         <propertiesFilePath>${JENKINS_HOME}/workspace/build.properties/${BUILD_NUMBER}.properties</propertiesFilePath>
         <scriptContent>WORKSPACE=${JENKINS_HOME}/workspace/${JOB_NAME}
 
-[ -d ${WORKSPACE} ] || git clone https://github.com/pingworks/continuous-delivery-workshop.git ${WORKSPACE}
+[ -d ${WORKSPACE} ] || git clone /data/git/continuous-delivery-workshop ${WORKSPACE}
 cd ${WORKSPACE}
 git fetch origin
 git checkout ${REV}
@@ -54,7 +54,7 @@ bash scripts/repo/prepare_build.sh ${BRANCH} ${REV} ${BUILD_NUMBER}
       <hudson.plugins.git.UserRemoteConfig>
         <name></name>
         <refspec></refspec>
-        <url>https://github.com/pingworks/continuous-delivery-workshop.git</url>
+        <url>/data/git/continuous-delivery-workshop</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
