@@ -1,0 +1,38 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
+umask 022
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+case $TERM in
+*vt100*|cons25)
+        export PS1='\h:\w\$ ' ;;
+linux*)
+        export PS1='\[\e[1m\]\h:\w\$\[\e[0m\] ' ;;
+*)
+        export PS1='\[\e]2;\u@\h:\w \a\e[1m\]\h:\w\$\[\e[0m\] ' ;;
+esac
+
+export GREP_OPTIONS="-d skip --color=auto"
+
+HISTCONTROL=ignoredups
+HISTIGNORE="..:[bf]g:cd:l:ls"
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias j='jobs -l'
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias l='ls -la'
+alias o='less'
+
+#alias rm='rm -i'
+#alias cp='cp -i'
+#alias mv='mv -i'
+
+export EDITOR=vi
+

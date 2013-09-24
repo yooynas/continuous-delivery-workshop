@@ -1,0 +1,9 @@
+Package: bookstore
+Version: [[version]]
+Section: misc
+Priority: optional
+Architecture: all
+Depends: tomcat7
+Maintainer: Christoph Lukas <info@pingworks.de>
+Description: Example Bookstore application
+Distribution: development

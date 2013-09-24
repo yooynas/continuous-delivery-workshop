@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+case "$1" in
+	install|upgrade)
+		/etc/init.d/tomcat7 stop
+	;;
+esac

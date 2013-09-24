@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.cloudbees.plugins.flow.BuildFlow plugin="build-flow-plugin@0.10">
+  <actions/>
+  <description>Umschließender Job für alle Jobs der Commit-Stage.&lt;br /&gt;&#xd;
+1) Bereitet zu der übergebenen Commit Id ein neues Bundle im Repo vor&lt;br /&gt;&#xd;
+2) Führt parallel alle Compile / Unittest-Jobs der einzelnen Module aus&lt;br /&gt;&#xd;
+3) Sammelt die Testergebnisse ein und schreibt diese ins Bundle&lt;br /&gt;&#xd;
+4) Packt alle erzeugten Artefakte zu einem neuen Bundlefile zusammen&lt;br /&gt;&#xd;
+</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>20</daysToKeep>
+    <numToKeep>20</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH</name>
+          <description>Branch aus dem Version Control System</description>
+          <defaultValue>master</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>REV</name>
+          <description>Revision oder Commit ID aus dem Version Control System</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <EnvInjectJobProperty plugin="envinject@1.88">
+      <info>
+        <propertiesFilePath>${JENKINS_HOME}/workspace/build.properties/${BUILD_NUMBER}.properties</propertiesFilePath>
+        <scriptContent>WORKSPACE=${JENKINS_HOME}/workspace/${JOB_NAME}
+
+[ -d ${WORKSPACE} ] || git clone https://github.com/pingworks/continuous-delivery-workshop.git ${WORKSPACE}
+cd ${WORKSPACE}
+git fetch origin
+git checkout ${REV}
+bash scripts/repo/prepare_build.sh ${BRANCH} ${REV} ${BUILD_NUMBER}
+</scriptContent>
+        <loadFilesFromMaster>true</loadFilesFromMaster>
+      </info>
+      <on>true</on>
+      <keepJenkinsSystemVariables>true</keepJenkinsSystemVariables>
+      <keepBuildVariables>true</keepBuildVariables>
+      <contributors/>
+    </EnvInjectJobProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.5.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <name></name>
+        <refspec></refspec>
+        <url>https://github.com/pingworks/continuous-delivery-workshop.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>${REV}</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <disableSubmodules>false</disableSubmodules>
+    <recursiveSubmodules>false</recursiveSubmodules>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
+    <clean>false</clean>
+    <wipeOutWorkspace>false</wipeOutWorkspace>
+    <pruneBranches>false</pruneBranches>
+    <remotePoll>false</remotePoll>
+    <ignoreNotifyCommit>false</ignoreNotifyCommit>
+    <useShallowClone>false</useShallowClone>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
+    <submoduleCfg class="list"/>
+    <relativeTargetDir></relativeTargetDir>
+    <reference></reference>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
+    <skipTag>false</skipTag>
+    <includedRegions></includedRegions>
+    <scmName></scmName>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders/>
+  <publishers>
+    <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@1.8">
+      <groovyScript>manager.addShortText(&quot;${manager.build.environment.BRANCH}:${manager.build.environment.REV}&quot;)</groovyScript>
+      <behavior>0</behavior>
+    </org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder>
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.20">
+      <configs>
+        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+          <configs>
+            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+              <properties>BUNDLE=${BUNDLE}</properties>
+            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+          </configs>
+          <projects>2nd-stage, </projects>
+          <condition>SUCCESS</condition>
+          <triggerWithNoParameters>false</triggerWithNoParameters>
+        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+      </configs>
+    </hudson.plugins.parameterizedtrigger.BuildTrigger>
+  </publishers>
+  <buildWrappers/>
+  <icon/>
+  <dsl>workspace = build.environment.WORKSPACE
+bundle = build.environment.BUNDLE
+out.println &quot;Bundle: ${bundle}&quot;
+
+cmd = &quot;rm &quot; + workspace + &quot;/build.properties/&quot; + build.environment.BUILD_NUMBER + &quot;.properties&quot;
+cmd.execute()
+
+jobs = []
+guard {
+    parallel (
+        { jobs.add(build( &quot;1st-stage-bookstore&quot;, BUNDLE: bundle )) },
+    )
+} rescue {
+    success = true
+    for ( job in jobs ) {
+        // collect test results
+        jobResultAction = job.build.testResultAction
+        jobResultData = &quot;&quot; + [
+            job.name, 
+            job.build.getUrl(), 
+            job.build.result.toString(), 
+            (jobResultAction) ? jobResultAction.getTotalCount() : 0, 
+            (jobResultAction) ? jobResultAction.getSkipCount() : 0, 
+            (jobResultAction) ? jobResultAction.getFailCount() : 0
+        ].join(&apos;;&apos;)
+        out.println &quot;Job: &quot; + job.name + &quot; Result:&quot; + jobResultData
+
+        // write test results to metadata
+        cmd = &quot;bash ${workspace}/scripts/repo/add_metadata.sh ${bundle} first_stage_results ${jobResultData}&quot;
+        process = cmd.execute()
+
+        // merge overall success
+        success = (success == true &amp;&amp; job.build.result.toString() == &quot;SUCCESS&quot;)
+    }
+    out.println &quot;Overall Success: &quot; + success
+    // run finisher
+    build( &quot;1st-stage-bundler&quot;, SUCCESS: success, BUNDLE: bundle )
+}
+</dsl>
+</com.cloudbees.plugins.flow.BuildFlow>

@@ -1,0 +1,9 @@
+Package: [[name]]
+Version: [[version]]
+Section: misc
+Priority: optional
+Architecture: all
+Depends: bash
+Maintainer: Christoph Lukas <lukas@pingworks.de>
+Description: Dash Scripts
+Distribution: development

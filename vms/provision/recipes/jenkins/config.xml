@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson>
+  <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
+  <jdks>
+    <jdk>
+      <name>Oracle Java 1.7</name>
+      <home>/usr/lib/jvm/j2sdk1.7-oracle</home>
+      <properties/>
+    </jdk>
+  </jdks>
+</hudson>

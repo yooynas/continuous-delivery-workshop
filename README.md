@@ -1,2 +1,2 @@
-cd-workshop
-===========
+continuous-delivery-workshop
+============================
