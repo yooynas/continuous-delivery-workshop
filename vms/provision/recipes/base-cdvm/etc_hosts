@@ -6,6 +6,8 @@ __DEPLOY_ENV_IP__   jenkins__DEPLOY_ENV_DOMAIN_SUFFIX__ jenkins
 
 192.168.56.101  testvm.testenv01.__DEPLOY_ENV_DOMAIN_SUFFIX__
 192.168.56.100  cdvm.__DEPLOY_ENV_DOMAIN_SUFFIX__
+192.168.56.100  dash.__DEPLOY_ENV_DOMAIN_SUFFIX__
+192.168.56.100  repo.__DEPLOY_ENV_DOMAIN_SUFFIX__
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
