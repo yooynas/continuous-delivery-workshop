@@ -41,7 +41,7 @@ Dash.config = {
         }, {
             id: 'RepoButton',
             text: 'Repo',
-            url: 'http://dash.cd-workshop.local/repo/'
+            url: 'http://repo.cd-workshop.local'
         }, {
             id: 'EnvButton',
             text: 'Environments',
@@ -59,8 +59,9 @@ Dash.config = {
             change: 'resources/img/icons/change.png',
             deploy: 'resources/img/icons/deploy.png'
         },
-        repolink: '<a href="http://dash.cd-workshop.local/repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
-        vcslink: '<a href="http://dash.cd-workshop.local/git/?p=dash.git;a=commit;h={0}" target="_blank" style="color: black">{0}</a>',
+        repolink: '<a href="http://repo.cd-workshop.local/{0}/{1}" target="_blank" style="color: black">{1}</a>',
+        //vcslink: '<a href="http://dash.cd-workshop.local/git/?p=dash.git;a=commit;h={0}" target="_blank" style="color: black">{0}</a>',
+        vcslink: '',
         sort: {
             field: 'timestamp',
             dir: 'DESC'
