@@ -29,9 +29,6 @@ if [ -z "$(java -version 2>&1 | grep 1.7.0_40)" ];then
   dpkg -i /home/$CONF_DUSER/Downloads/${JAVA_DEB}
 fi
 
-echo "Installing maven..."
-apt-get --yes install maven
-
 update-alternatives --set java /usr/lib/jvm/j2sdk1.7-oracle/jre/bin/java
 
 echo "# -------------------------------------------------"

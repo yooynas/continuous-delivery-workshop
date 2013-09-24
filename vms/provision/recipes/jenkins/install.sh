@@ -14,6 +14,9 @@ echo "# -------------------------------------------------"
 echo "# BEGIN Provisioning RECIPE $RECIPE"
 echo "# -------------------------------------------------"
 
+echo "Installing maven..."
+apt-get --yes install maven
+
 echo "Installing Jenkins..."
 wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
 echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list

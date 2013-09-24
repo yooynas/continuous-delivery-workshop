@@ -26,6 +26,6 @@ ARTIFACTS=$(cd ${BUNDLE_FOLDER}/artifacts/; ls )
 cd ${BUNDLE_FOLDER}/artifacts/ 
 scp ${ARTIFACTS} ${ENV_USER}@${ENV}:${ENV_TMP}/
 for pkg in ${ARTIFACTS}; do
-  ssh ${ENV_USER}@${ENV} "cd ${ENV_TMP}; ${PKGMGR} ${PKGMGR_INSTALLOPTS} $pkg"
+  ssh -o StrictHostKeyChecking=no ${ENV_USER}@${ENV} "cd ${ENV_TMP}; ${PKGMGR} ${PKGMGR_INSTALLOPTS} $pkg"
 done 
 echo "done."
