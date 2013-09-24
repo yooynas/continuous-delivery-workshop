@@ -130,22 +130,32 @@ for SL in $SYMLINKS;do
 done
 
 # -----------------------------------------
+[ ! -d /data/git ] && mkdir /data/git
+chown jenkins.${CONF_DGROUP} /data/git
+chmod 2775 /data/git
+
+cd /data/git
+if [ ! -d continuous-delivery-workshop/.git ];then
+  echo "Cloning continuous-delivery-workshop (1)..."
+  apt-get update
+  apt-get install -y git
+  sudo -u vagrant git clone ${PROVISIONING_GIT_URI} continuous-delivery-workshop
+else
+  echo "Updating /data/git/continuous-delivery-workshop ..."
+  cd continuous-delivery-workshop
+  sudo -u vagrant git pull
+fi
 
 cd ${CONF_DHOME}/workspace
 
 if [ ! -d continuous-delivery-workshop/.git ];then
-  echo "Cloning continuous-delivery-workshop..."
-  apt-get update
-  apt-get install -y git
-  git clone ${PROVISIONING_GIT_URI} continuous-delivery-workshop
+  echo "Cloning continuous-delivery-workshop from /data/git (2)..."
+  sudo -u vagrant git clone /data/git/continuous-delivery-workshop continuous-delivery-workshop
 else
-  echo "Updating ${CONF_DHOME}/workspace/continuous-delivery-workshop ..."
+  echo "Updating ${CONF_DHOME}/workspace/continuous-delivery-workshop from /data/git..."
   cd continuous-delivery-workshop
-  git pull
+  sudo -u vagrant git pull
 fi
-
-chown -R ${CONF_DUSER}.${CONF_DGROUP} ${CONF_DHOME}/workspace/continuous-delivery-workshop
-chown -R ${CONF_DUSER}.${CONF_DGROUP} ${CONF_DHOME}/workspace/continuous-delivery-workshop/.git
 
 if [ ! -d /srv/deploy/vms/provision ];then
   echo "ERROR: Provisioning dir /srv/deploy/vms/provision not found!"

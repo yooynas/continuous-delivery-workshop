@@ -15,6 +15,7 @@ echo "# -------------------------------------------------"
 echo "Checking /etc/hosts..."
 
 echo "Installing vm specific /etc/hosts file..."
+echo "$CONF_PHOME/recipes/$RECIPE/etc_hosts"
 cpAndSubstDeployEnvVars $CONF_PHOME/recipes/$RECIPE/etc_hosts /etc/hosts root.root 644
 
 echo "# -------------------------------------------------"

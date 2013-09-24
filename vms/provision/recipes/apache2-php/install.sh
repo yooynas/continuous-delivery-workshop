@@ -16,7 +16,6 @@ echo "# -------------------------------------------------"
 echo "Installing apache2-php..."
 apt-get install --yes php5 php5-curl
 
-
 echo "# -------------------------------------------------"
 echo "# END Provisioning RECIPE $RECIPE"
 echo "# -------------------------------------------------"
