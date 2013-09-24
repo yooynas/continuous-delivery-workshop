@@ -104,6 +104,7 @@
     <hudson.tasks.Shell>
       <command>cat &lt;&lt; EOF &gt; bookstore/src/test/resources/selenium.properties
 url=http://testvm.testenv01.cd-workshop.local:8080/bookstore
+EOF
 
 bash /srv/deploy/scripts/repo/install_bundle.sh ${BUNDLE} testvm.testenv01.cd-workshop.local</command>
     </hudson.tasks.Shell>

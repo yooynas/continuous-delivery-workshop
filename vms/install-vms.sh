@@ -40,7 +40,7 @@ cdvm)
   ;;
 
 testvm)
-  RECIPES="base-all base-testvm runtime-java"
+  RECIPES="base-all base-testvm runtime-java tomcat7"
 
   DEPLOY_ENV_DEPLOY_HOST="testvm"
   DEPLOY_ENV_DOMAIN_SUFFIX=".testenv01.cd-workshop.local"
