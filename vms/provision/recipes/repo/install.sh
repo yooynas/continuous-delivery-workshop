@@ -7,7 +7,7 @@
 . /srv/deploy/vms/provision/common.sh
 
 set -e 
-RECIPE='<fill in role here>'
+RECIPE='repo'
 
 echo "# -------------------------------------------------"
 echo "# BEGIN Provisioning RECIPE $RECIPE"

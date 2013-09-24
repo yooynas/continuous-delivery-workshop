@@ -7,7 +7,7 @@
 . /srv/deploy/vms/provision/common.sh
 
 set -e 
-RECIPE='<fill in role here>'
+RECIPE='desktop-files'
 
 echo "# -------------------------------------------------"
 echo "# BEGIN Provisioning RECIPE $RECIPE"
