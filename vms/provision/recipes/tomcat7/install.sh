@@ -16,6 +16,8 @@ echo "# -------------------------------------------------"
 echo "Installing tomcat..."
 apt-get install -y tomcat7
 
+sed -i -e 's;^JAVA_OPTS=.*$;JAVA_OPTS="-Djava.awt.headless=true -Xmx512m -XX:+UseConcMarkSweepGC";' /etc/default/tomcat7
+
 echo "# -------------------------------------------------"
 echo "# END Provisioning RECIPE $RECIPE"
 echo "# -------------------------------------------------"
