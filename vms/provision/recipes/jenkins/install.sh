@@ -25,6 +25,9 @@ apt-get --yes install jenkins
 
 /etc/init.d/jenkins stop
 
+rsync -a /home/vagrant/.ssh/ /var/lib/jenkins/.ssh/
+chown -R jenkins.nogroup /var/lib/jenkins/.ssh/
+
 JENKINS_PLUGINS=plugins.tar.gz
 
 install -o ${CONF_DUSER} -g ${CONF_DGROUP} -m 755 -d /home/$CONF_DUSER/Downloads
