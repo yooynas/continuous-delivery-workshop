@@ -46,7 +46,7 @@ fi
 if [ ! -f /etc/apache2/sites-available/dash ];then
     cat << EOF > /etc/apache2/sites-available/dash
 <VirtualHost *:80>
-ServerName dash.${DEPLOY_ENV_DOMAIN_SUFFIX}
+ServerName dash${DEPLOY_ENV_DOMAIN_SUFFIX}
 ServerAlias dash
 
 DocumentRoot /opt/dash/public
