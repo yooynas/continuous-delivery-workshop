@@ -21,7 +21,7 @@ function substituteDeployEnvVars() {
     TMPPATTERN="__"${DEPLOY_ENV_CONFFILE}"__"
     #echo "DEBUG: TMPPATTERN=$TMPPATTERN"
     #echo "DEBUG: substituteDeployEnvVars() Substitution PATTERN=$TMPPATTERN VALUE=${!DEPLOY_ENV_CONFFILE}"
-    sed -i -e "s/$TMPPATTERN/${!DEPLOY_ENV_CONFFILE}/g" $FILEPATH
+    sed -i -e "s;$TMPPATTERN;${!DEPLOY_ENV_CONFFILE};g" $FILEPATH
     if [ $? -ne 0 ];then
       echo "ERROR: Failed sed -i s/$TMPPATTERN/${!DEPLOY_ENV_CONFFILE}/g on $FILEPATH"
       exit 1
