@@ -130,8 +130,10 @@ for SL in $SYMLINKS;do
 done
 
 # -----------------------------------------
+[ -d /home/${CONF_DUSER}/.ssh ] && chown -R ${CONF_DUSER}.${CONF_DGROUP} /home/${CONF_DUSER}/.ssh
+
 [ ! -d /data/git ] && mkdir /data/git
-chown jenkins.${CONF_DGROUP} /data/git
+chown ${CONF_DUSER}.${CONF_DGROUP} /data/git
 chmod 2775 /data/git
 
 cd /data/git
