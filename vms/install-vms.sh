@@ -31,7 +31,7 @@ CONF_PHOME=/srv/deploy/vms/provision
 case "${PROVISIONING_TARGET_NAME}" in  
 cdvm)
   #RECIPES="base-all base-cdvm runtime-java jenkins selenium apache2-php x-desktop browser-firefox"
-  RECIPES="base-all base-cdvm runtime-java jenkins selenium apache2-php pingworks-dash"
+  RECIPES="base-all base-cdvm runtime-java jenkins selenium apache2-php pingworks-dash x-desktop browser-firefox"
 
   DEPLOY_ENV_DEPLOY_HOST="cdvm"
   DEPLOY_ENV_DOMAIN_SUFFIX=".cd-workshop.local"

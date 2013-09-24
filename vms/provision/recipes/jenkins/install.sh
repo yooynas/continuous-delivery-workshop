@@ -23,9 +23,16 @@ apt-get --yes install jenkins
 /etc/init.d/jenkins stop
 
 JENKINS_PLUGINS=plugins.tar.gz
-echo "Downloading Jenkins Plugins from ${PROVISIONING_SERVER_URI}/${JENKINS_PLUGINS}..."
-wget -q -O - ${PROVISIONING_SERVER_URI}/${JENKINS_PLUGINS} \
-  | tar xz -C /var/lib/jenkins
+[ ! -d /home/$CONF_DUSER/Downloads ] && mkdir /home/$CONF_DUSER/Downloads
+[ ! -z "$(file /home/$CONF_DUSER/Downloads/${JENKINS_PLUGINS} | grep empty)" ] && rm /home/$CONF_DUSER/Downloads/${JENKINS_PLUGINS}
+  
+if [ ! -f /home/$CONF_DUSER/Downloads/${JENKINS_PLUGINS} ];then
+  echo "Downloading Jenkins Plugins from ${PROVISIONING_SERVER_URI}/${JENKINS_PLUGINS}..."
+  wget -q -O /home/$CONF_DUSER/Downloads/${JENKINS_PLUGINS} ${PROVISIONING_SERVER_URI}/${JENKINS_PLUGINS} > /dev/null
+  chown $CONF_DUSER.users /home/$CONF_DUSER/Downloads/${JENKINS_PLUGINS}
+fi
+
+tar xz -C /var/lib/jenkins -f /home/$CONF_DUSER/Downloads/${JENKINS_PLUGINS}
 chown -R jenkins.nogroup /var/lib/jenkins/plugins
 
 install -o jenkins -g nogroup -m 644 $CONF_PHOME/recipes/$RECIPE/config.xml /var/lib/jenkins/
