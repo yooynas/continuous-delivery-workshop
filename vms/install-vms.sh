@@ -132,7 +132,7 @@ done
 # -----------------------------------------
 [ -d /home/${CONF_DUSER}/.ssh ] && chown -R ${CONF_DUSER}.${CONF_DGROUP} /home/${CONF_DUSER}/.ssh
 
-[ ! -d /data/git ] && mkdir /data/git
+[ ! -d /data/git ] && mkdir -p /data/git
 chown ${CONF_DUSER}.${CONF_DGROUP} /data/git
 chmod 2775 /data/git
 
