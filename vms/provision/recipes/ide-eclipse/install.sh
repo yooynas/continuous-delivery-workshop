@@ -35,7 +35,7 @@ ECLIPSE_LAUNCHES_DIR=/home/$CONF_DUSER/workspace/.metadata/.plugins/org.eclipse.
 
 [ ! -d $ECLIPSE_LAUNCHES_DIR ] && mkdir -p $ECLIPSE_LAUNCHES_DIR
 
-rsync -avx $CONF_PHOME/recipes/$RECIPE/launches/ ${ECLIPSE_LAUNCHES_DIR}/
+#rsync -avx $CONF_PHOME/recipes/$RECIPE/launches/ ${ECLIPSE_LAUNCHES_DIR}/
 
 apt-get install -y xauth libgtk2.0-0 libcanberra-gtk-module libxtst6
 
