@@ -67,6 +67,8 @@ ProxyPassReverse   /jenkins/   http://localhost:8080/jenkins/
 EOF
 fi
 a2enmod rewrite
+a2enmod proxy
+a2enmod proxy_http
 a2dissite 000-default
 a2ensite dash
 
