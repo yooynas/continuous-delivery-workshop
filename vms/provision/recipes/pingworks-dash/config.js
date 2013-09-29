@@ -179,7 +179,7 @@ Dash.config = {
     
     deployment: {
         triggerUrl: 'http://dash.cd-workshop.local/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
-        showUrl: 'ttp://dash.cd-workshop.local/jenkins/job/Deployment/',
+        showUrl: 'http://dash.cd-workshop.local/jenkins/job/Deployment/',
         features: {
         	content: {
         		enabled: false,
