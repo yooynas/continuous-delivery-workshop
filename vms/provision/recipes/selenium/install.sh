@@ -42,6 +42,8 @@ fi
 /etc/init.d/headless-selenium stop || true
 /etc/init.d/headless-selenium start
 
+update-rc.d headless-selenium defaults
+
 echo "# -------------------------------------------------"
 echo "# END Provisioning RECIPE $RECIPE"
 echo "# -------------------------------------------------"
