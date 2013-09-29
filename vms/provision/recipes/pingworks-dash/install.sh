@@ -77,7 +77,7 @@ chmod 0644 /etc/dash-frontend/config.js
   
 /etc/init.d/apache2 restart
 
-[ -d /data/envs ] || install -o www-data -g www-data -m 755 /data/envs
+[ -d /data/envs ] || install -o www-data -g www-data -m 755 -d /data/envs
 [ -e /data/envs/testenv01.json ] || install -o www-data -g www-data -m 644 $CONF_PHOME/recipes/$RECIPE/testenv01.json /data/envs  
 
 echo "# -------------------------------------------------"
