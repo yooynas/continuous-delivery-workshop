@@ -60,6 +60,8 @@ fi
 [ -d /data/repo ] || mkdir -p /data/repo
 chown jenkins.nogroup /data/repo    
 
+sed -i -e 's;^JENKINS_ARGS=;JENKINS_ARGS="--webroot=/var/cache/jenkins/war --httpPort=$HTTP_PORT --ajp13Port=$AJP_PORT --prefix=$PREFIX";' /etc/default/jenkins
+
 /etc/init.d/jenkins start
 
 echo "# -------------------------------------------------"

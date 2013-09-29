@@ -1,0 +1,14 @@
+{
+	"id":"testenv01",
+	"name":"Testenv 01",
+	"domainname":"testvm.testenv01.cd-workshop.local",
+	"deployable":true,
+	"locked":false,
+	"by":"",
+	"until":"",
+	"bundle":"",
+	"urls":[
+		{"name":"Bookstore","url":"http:\/\/testvm.testenv01.cd-workshop.local:8080\/bookstore\/"}
+	],
+	"content":""
+}

@@ -37,7 +37,7 @@ Dash.config = {
         links: [{
             id: 'JenkinsButton',
             text: 'Jenkins',
-            url: 'http://dash.cd-workshop.local:8080'
+            url: 'http://dash.cd-workshop.local/jenkins/'
         }, {
             id: 'RepoButton',
             text: 'Repo',
@@ -163,7 +163,7 @@ Dash.config = {
     jobresult: {
         endpoint: '/jobresult',
         text: '<img src="{6}" alt="{2}" class="{7}">&nbsp;' 
-            + '<a href="http://dash.cd-workshop.local:8080/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}',
+            + '<a href="http://dash.cd-workshop.local/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}',
         title: '{1} stage Jobs für Bundle {2}',
         stageMap: {
             1: 'First',
@@ -178,8 +178,8 @@ Dash.config = {
     },
     
     deployment: {
-        triggerUrl: 'http://dash.cd-workshop.local:8080/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
-        showUrl: 'ttp://dash.cd-workshop.local:8080/job/Deployment/',
+        triggerUrl: 'http://dash.cd-workshop.local/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
+        showUrl: 'ttp://dash.cd-workshop.local/jenkins/job/Deployment/',
         features: {
         	content: {
         		enabled: false,
